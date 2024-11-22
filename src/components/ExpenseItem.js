@@ -1,22 +1,18 @@
-// ExpenseItem.js
-import './ExpenseItem.css';
-import ExpenseDate from './ExpenseDate';
+import './ExpenseItem.css'
+import ExpenseDate from './ExpenseDate'
 
-function ExpenseItem(props) {
-    console.log(props.date);
-    const day = props.date.toLocaleString('en-US', {day: '2-digit'} )
-    const month = props.date.toLocaleString('en-US', {month: 'long'} )
-    const year = props.date.getFullYear()
+const ExpenseItem = (props) => {
     
-    return (
+
+    return(
         <div className='expense-item'>
-            <ExpenseDate date={props.date} />
+            <ExpenseDate date={props.data.date} />
             <div className='expense-item__description'>
-                <h2>{props.title}</h2>
-                <div className='expense-item__price'>${props.price}</div>
+                <h2>{props.data.title}</h2>
+                <div className='expense-item__price'>{props.data.price}</div>
             </div>
         </div>
-    );
-}
+    )
+} 
 
-export default ExpenseItem;
+export default ExpenseItem
