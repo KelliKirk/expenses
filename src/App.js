@@ -1,5 +1,5 @@
 import './App.css';
-import ExpenseItem from './components/ExpenseItem';
+import Expenses from './components/Expenses';  // Importige Expenses komponent
 
 const App = () => {
   const expenses = [
@@ -13,12 +13,11 @@ const App = () => {
       title: 'New Bag',
       price: 99.99
     }
-  ]  
+  ];  
 
   return (
     <div className="App">
-      <ExpenseItem data={expenses[0]} />
-      <ExpenseItem data={expenses[1]} />
+      <Expenses expenses={expenses} /> {/* Siin kasutate Expenses komponenti */}
     </div>
   );
 }
