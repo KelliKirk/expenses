@@ -1,11 +1,16 @@
-import './ExpenseDate.css'
-
-const ExpenseDate = () => {
-    return (<div className = 'expense-date'>
-        <div className = 'expense-date__month'>Month</div>
-        <div className = 'expense-date__day'>Day</div>
-        <div className = 'expense-date__year'>Year</div>
-        </div>)
-    } 
+const ExpenseDate = (props) => {
     
-    export default ExpenseDate
+    const month = props.date.toLocaleString('en-EE',{month: 'long'})
+    const day = props.date.toLocaleString('en-EE',{day: '2-digit'})
+    const year = props.date.getFullYear()
+
+    return(
+        <div>
+            <div>{month}</div>
+            <div>{day}</div>
+            <div>{year}</div>
+        </div>
+    )
+}  
+
+export default ExpenseDate
