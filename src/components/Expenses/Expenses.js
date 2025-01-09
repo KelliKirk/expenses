@@ -14,12 +14,19 @@ const Expenses = (props) => {
         console.log('Year data in Expenses.js:', selectedYear);
         setSelectedYear(selectedYear);
     }
-
+        props.expenses.map((expense) => {
+            console.log(expense)
+        } ) // map funktsioon loob uue massiivi algset massiivi muutmata ning tagastab täpselt sama pika massiivi kui sisend
     return (
             <Card className="expenses"> 
                 <ExpensesFilter selected={selectedYear}
                 onChangeFilter={filterChangeHandler}
                 />  
+               {
+                props.expenses.map((expense) => {
+                    return <ExpenseItem data={expense} /> 
+                } ) // iga massiivi elemendiga peab kuvama ExpenseItem komponendi ja tagastama tulemuse põhiprogrammile
+               } 
                 <ExpenseItem data={props.expenses[0]} />
                 <ExpenseItem data={props.expenses[1]} />
             </Card>

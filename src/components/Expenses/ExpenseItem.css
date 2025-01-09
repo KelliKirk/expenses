@@ -26,7 +26,7 @@
     color: white;
 }
 
-.expense-item__price {
+.expense-item__amount {
     font-size: 1rem;
     font-weight: bold;
     color: white;
@@ -48,7 +48,7 @@
         font-size: 1.25rem;
     }
 
-    .expense-item__price {
+    .expense-item__amount {
         font-size: 1.25rem;
         padding: 0.5rem 1.5rem;
     }
