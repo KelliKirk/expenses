@@ -24,7 +24,7 @@ const Expenses = (props) => {
                 />  
                {
                 props.expenses.map((expense) => {
-                    return <ExpenseItem data={expense} /> 
+                    return <ExpenseItem data={expense} key={expense.id} /> 
                 } ) // iga massiivi elemendiga peab kuvama ExpenseItem komponendi ja tagastama tulemuse põhiprogrammile
                } 
                 <ExpenseItem data={props.expenses[0]} />

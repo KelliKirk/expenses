@@ -7,11 +7,13 @@ import NewExpense from './components/NewExpense/NewExpense'
 const App = () => {
   const DYMMY_EXPENSES = [
     {
+      id: 'id1',
       date: new Date(2024, 10, 22),
       title: 'New Book',
-      amount: 39.99
+      amount: 19.20
     },
     {
+      id: 'id2',
       date: new Date(2024, 10, 22),
       title: 'New Bag',
       amount: 99.99
