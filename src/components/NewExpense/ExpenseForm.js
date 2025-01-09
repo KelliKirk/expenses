@@ -4,6 +4,22 @@ import { useState } from 'react'
 
 const ExpenseForm = (props) => {
 
+    const submitHandler = (event) => {
+        event.preventDefault()
+        console.log('Form submitted')
+        const expenseData = {
+            title: enteredTitle,
+            price: enteredPrice,
+            date: new Date(enteredDate)
+
+
+        } 
+        console.log(expenseData)
+        setEnteredTitle('')
+        setEnteredPrice('')
+        setEnteredDate('')
+    } 
+
     const [enteredTitle, setEnteredTitle] = useState('')
     const [enteredPrice, setEnteredPrice] = useState('')
     const [enteredDate, setEnteredDate] = useState('')
@@ -23,20 +39,22 @@ const ExpenseForm = (props) => {
     } 
 
 return (
-    <form>
+    <form onSubmit={submitHandler} >
         <div className="new-expense__controls">
             <div className="new-expense__control">
             <label>Title</label>
             <input 
             type="text"
-            onChange={titleChangeHandler} /></div>
+            onChange={titleChangeHandler}
+            value={enteredTitle}  /></div>
         <div className="new-expense__control">
             <label>Price</label>
             <input 
             type="number" 
             min="0.01" 
             step="0.01"
-            onChange={priceChangeHandler} />
+            onChange={priceChangeHandler}
+            value={enteredPrice}  />
         </div>
         <div className="new-expense__control">
             <label>Date</label>
@@ -44,7 +62,8 @@ return (
             type="date" 
             min="2025-01-09" 
             step="2026-01-31"
-            onChange={dateChangeHandler} />
+            onChange={dateChangeHandler} 
+            value={enteredDate} />
         </div>
         <div className="new-expense__actions">
             <button type="submit">Add Expense</button>
