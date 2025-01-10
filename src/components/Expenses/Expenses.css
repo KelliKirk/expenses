@@ -5,3 +5,9 @@
     width: 50rem;
     max-width: 95%;
 }  
+
+.expenses-list__fallback {
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}

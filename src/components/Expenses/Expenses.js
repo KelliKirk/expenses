@@ -21,6 +21,7 @@ const Expenses = (props) => {
     const filteredExpenses = props.expenses.filter(expense => {
         return expense.date.getFullYear().toString() === selectedYear;
     })
+
     console.log('Filtered expenses:', filteredExpenses)
 
         filteredExpenses.map((expense) => {
@@ -31,8 +32,13 @@ const Expenses = (props) => {
                 <ExpensesFilter selected={selectedYear}
                 onChangeFilter={filterChangeHandler}
                 />  
+
                {
-                filteredExpenses.map((expense) => {
+               filteredExpenses.length === 0 && <p className="expenses-list__fallback">No expenses found.</p>
+               } 
+
+               {
+                filteredExpenses.length > 0 && filteredExpenses.map((expense) => {
                     return <ExpenseItem data={expense} key={expense.id} /> 
                 } ) // iga massiivi elemendiga peab kuvama ExpenseItem komponendi ja tagastama tulemuse põhiprogrammile
                } 
