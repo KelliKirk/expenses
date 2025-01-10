@@ -1,7 +1,7 @@
 import './App.css';
 import Expenses from './components/Expenses/Expenses';  
 import NewExpense from './components/NewExpense/NewExpense'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 
 
@@ -34,7 +34,18 @@ const App = () => {
     },
   ];  
  
-  const [expenses, setExpenses] = useState(DYMMY_EXPENSES)
+  const [expenses, setExpenses] = useState(() => {
+    const expensesFromLS = JSON.parse(localStorage.getItem('expenses'))
+    return expensesFromLS ? expensesFromLS.map(expense => ({
+      ...expense,
+      date: new Date(expense.date) // Veendume, et date on kuupäeva objekt
+    })) : []
+  })
+  
+
+  useEffect(() => {
+    localStorage.setItem('expenses', JSON.stringify(expenses))
+  },[expenses])
 
   const addExpenseHandler = (expense) => {
     setExpenses((previousExpenses) => {

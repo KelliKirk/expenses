@@ -7,19 +7,19 @@ import { useState } from 'react'
 
 const Expenses = (props) => {
     // useState filtreerimisaasta jaoks
-    const [selectedYear, setSelectedYear] = useState('2024')
+    const [filteredYear, setFilteredYear] = useState('2024')
 
     // filtri muutuse handler
-    const filterChangeHandler = (selectedYear) => {
+    const filterChangeHandler = (filteredYear) => {
         
-        setSelectedYear(selectedYear);
+        setFilteredYear(filteredYear);
     }
     
-    console.log('Year data in Expenses.js:', selectedYear)
+    console.log('Year data in Expenses.js:', filteredYear)
 
     // Filtreerimine
     const filteredExpenses = props.expenses.filter(expense => {
-        return expense.date.getFullYear().toString() === selectedYear;
+        return expense.date.getFullYear().toString() === filteredYear;
     })
 
     console.log('Filtered expenses:', filteredExpenses)
@@ -29,7 +29,7 @@ const Expenses = (props) => {
         } ) // map funktsioon loob uue massiivi algset massiivi muutmata ning tagastab täpselt sama pika massiivi kui sisend
     return (
             <Card className="expenses"> 
-                <ExpensesFilter selected={selectedYear}
+                <ExpensesFilter filtered={filteredYear}
                 onChangeFilter={filterChangeHandler}
                 />  
 
