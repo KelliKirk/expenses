@@ -9,22 +9,28 @@ const App = () => {
 
   const DYMMY_EXPENSES = [
     {
-      id: 'id1',
+      id: 'id0',
       date: new Date(2024, 10, 22),
       title: 'New Book',
       amount: parseFloat(19.20) // parseFloat teeb stringist komakohaga arvu
     },
     {
-      id: 'id2',
-      date: new Date(2024, 10, 22),
+      id: 'id1',
+      date: new Date(2025, 0, 3),
       title: 'New Bag',
       amount: parseFloat(99.99)
     },
     {
-      id: 'id3',
+      id: 'id2',
       date: new Date(2024, 10, 22),
       title: 'New Jeans',
       amount: parseFloat(50.00)
+    },
+    {
+      id: 'id3',
+      date: new Date(2025, 0, 9),
+      title: 'New Coat',
+      amount: parseFloat(92.99)
     },
   ];  
  
