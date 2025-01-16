@@ -33,11 +33,13 @@ const App = () => {
       amount: parseFloat(92.99)
     },
   ];  
- 
+  
+  const[isFetching, setIsFetching] = useState(false) 
   const [expenses, setExpenses] = useState(() => {
     const expensesFromLS = JSON.parse(localStorage.getItem('expenses'))
+    // Kontrollime, kas expensesFromLS on olemas
     return expensesFromLS ? expensesFromLS.map(expense => ({
-      ...expense,
+      ...expense, // see rida muudab iga kulutuse objekti
       date: new Date(expense.date) // Veendume, et date on kuupäeva objekt
     })) : []
   })
@@ -46,6 +48,18 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem('expenses', JSON.stringify(expenses))
   },[expenses])
+
+  useEffect(() => { 
+  const getExpenses = async () => {
+    setIsFetching(true)
+    const response = await fetch('http://localhost:3005/expenses')
+    const responseData = await response.json()
+    setExpenses(responseData.expenses)
+    setIsFetching(false)
+  } 
+  getExpenses()
+  console.log(expenses)
+},[])  
 
   const addExpenseHandler = (expense) => {
     setExpenses((previousExpenses) => {
@@ -60,7 +74,8 @@ const App = () => {
   return (
     <div className="App">
       <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
-      <Expenses expenses={expenses} /> 
+      <Expenses expenses={expenses}
+      isLoading = {isFetching}  /> 
     </div>
   );
 }
