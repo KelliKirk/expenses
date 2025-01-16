@@ -1,0 +1,27 @@
+[
+    {
+      "id": "id0",
+      "date": "2024-11-22T00:00:00.000Z",
+      "title": "New Book",
+      "amount": 19.2
+    },
+    {
+      "id": "id1",
+      "date": "2025-01-03T00:00:00.000Z",
+      "title": "New Bag",
+      "amount": 99.99
+    },
+    {
+      "id": "id2",
+      "date": "2024-11-22T00:00:00.000Z",
+      "title": "New Jeans",
+      "amount": 50
+    },
+    {
+      "id": "id3",
+      "date": "2025-01-09T00:00:00.000Z",
+      "title": "New Coat",
+      "amount": 92.99
+    }
+  ]
+  
