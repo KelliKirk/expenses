@@ -1,18 +1,16 @@
 import './App.css';
-import Expenses from './components/Expenses/Expenses';  
+import Expenses from './components/Expenses/Expenses'  
 import NewExpense from './components/NewExpense/NewExpense'
 import { useState, useEffect } from 'react'
-
-
+import Error from './components/UI/Error'
 
 const App = () => {
-
-  const DYMMY_EXPENSES = [
+  const DYMMY_EXPENSES = [ 
     {
       id: 'id0',
       date: new Date(2024, 10, 22),
       title: 'New Book',
-      amount: parseFloat(19.20) // parseFloat teeb stringist komakohaga arvu
+      amount: parseFloat(19.20)
     },
     {
       id: 'id1',
@@ -34,7 +32,9 @@ const App = () => {
     },
   ];  
   
-  const[isFetching, setIsFetching] = useState(false) 
+  const [isFetching, setIsFetching] = useState(false)
+  const [error, setError] = useState(null);
+  const [showError, setShowError] = useState(false) 
   const [expenses, setExpenses] = useState(() => {
     const expensesFromLS = JSON.parse(localStorage.getItem('expenses'))
     // Kontrollime, kas expensesFromLS on olemas
@@ -44,40 +44,56 @@ const App = () => {
     })) : []
   })
   
-
   useEffect(() => {
     localStorage.setItem('expenses', JSON.stringify(expenses))
-  },[expenses])
+  }, [expenses]);
 
   useEffect(() => { 
-  const getExpenses = async () => {
-    setIsFetching(true)
-    const response = await fetch('http://localhost:3005/expenses')
-    const responseData = await response.json()
-    setExpenses(responseData.expenses)
-    setIsFetching(false)
-  } 
-  getExpenses()
-  console.log(expenses)
-},[])  
+    const getExpenses = async () => {
+      setIsFetching(true)
+      try {  
+        const response = await fetch('http://localhost:3005/expenses')
+        if (!response.ok) {
+          throw new Error('Failed fetching data.')
+        } 
+        const responseData = await response.json()
+        setExpenses(responseData.expenses)
+      } catch (error) {
+        setError({
+          title: 'An error occurred!',
+          message: 'Failed fetching expenses data, please try again later.'
+        })
+        setShowError(true)
+      } finally {
+        setIsFetching(false)
+      }
+    }
+    
+    getExpenses()
+  }, []) 
 
   const addExpenseHandler = (expense) => {
     setExpenses((previousExpenses) => {
-      return [expense, ...previousExpenses] 
-    } )
-
+      return [expense, ...previousExpenses]
+    })
     console.log('In App.js')
     console.log(expense)
-    setExpenses([expense, ...expenses])
   } 
 
   return (
     <div className="App">
-      <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
-      <Expenses expenses={expenses}
-      isLoading = {isFetching}  /> 
+      {showError && <Error 
+        title={error?.title} 
+        message={error?.message} 
+        onConfirm={() => setShowError(false)}
+      />}
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <Expenses 
+        expenses={expenses}
+        isLoading={isFetching} 
+      /> 
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
