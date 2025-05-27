@@ -4,7 +4,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ExpenseForm from '../ExpenseForm';
 
-// Mock Error component - õige tee NewExpense kaustast UI kausta
+// Mock Error component 
 jest.mock('../../UI/Error', () => {
   return function Error({ title, message, onConfirm }) {
     return (

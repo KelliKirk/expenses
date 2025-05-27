@@ -50,7 +50,7 @@ describe('ExpenseForm Component', () => {
     expect(dateInput.value).toBe('2025-12-01');
   });
 
-  // Test 6: Vormi esitamine õige andmetega
+  // Test 6: Vormi esitamine õigete andmetega
   test('submits form with correct data', () => {
     render(<ExpenseForm onSaveExpenseData={mockSaveExpenseData} onCancel={mockCancel} />);
 
@@ -68,7 +68,7 @@ describe('ExpenseForm Component', () => {
     // Esitame vormi
     fireEvent.click(submitButton);
 
-    // Kontrollime, et callback kutsuti õige andmetega
+    // Kontrollime, et callback kutsuti õigete andmetega
     expect(mockSaveExpenseData).toHaveBeenCalledTimes(1);
     expect(mockSaveExpenseData).toHaveBeenCalledWith({
       title: 'Test Expense',
